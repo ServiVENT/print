@@ -223,17 +223,20 @@ tabla.appendChild(cuerpoTabla);
 
 //-----------DATOS PRECIOS CAJA----------------------
 const subTotal = parametrosURL.get('subTotal');
+const otroDescuento = parametrosURL.get('otroDescuento');
 const impuesto = parametrosURL.get('impuesto');
 const descuento = parametrosURL.get('descuento');
 const total = parametrosURL.get('total');
 // formateamos a moneda Bs.
 const formatSubT = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(subTotal);
+const formatOtroDes = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(otroDescuento);
 const formatImp = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(impuesto);
 const formatDes = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(descuento);
 const formatTotal = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(total);
 
 // Mostrando parametros en mi HTML
 document.querySelector("#subTotal").innerHTML = (formatSubT);
+document.querySelector("#otroDescuento").innerHTML = (formatOtroDes);
 document.querySelector("#impuesto").innerHTML = (formatImp);
 document.querySelector("#descuento").innerHTML = (formatDes);
 document.querySelector("#total").innerHTML = (formatTotal);
