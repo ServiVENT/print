@@ -1,4 +1,4 @@
- /* Buscando los valores de la URL con la propiedad  window.location.search de JavaScript */
+/* Buscando los valores de la URL con la propiedad  window.location.search de JavaScript */
  const paramURL = window.location.search
  /* console.log(paramURL); */
 
@@ -28,9 +28,17 @@
  const precioProducto = parametrosURL.get('precioProducto');
 
  const subTotal = parametrosURL.get('subTotal');
+ const otroDescuento = parametrosURL.get('otroDescuento');
  const impuesto = parametrosURL.get('impuesto');
  const descuento = parametrosURL.get('descuento');
  const totalPrecio = parametrosURL.get('totalPrecio');
+
+ // formateamos a moneda Bs.
+const formatSubTotal = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(subTotal);
+const formatOtroDescuento = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(otroDescuento);
+const formatImpuesto = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(impuesto);
+const formatDescuento = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(descuento);
+const formatTotalPrecio = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(totalPrecio);
 
  /*FUNCION PARA UNIR ARRAYS*/
  function unirArray(datos1, datos2, datos3) {
@@ -44,11 +52,19 @@
      );
  }
  /*Convertimos en array cantidad, item, precio*/
- const cantidad = canProducto.split(",");
- const item = Producto.split(",");
- const precio = precioProducto.split(",");
+ const cantidad = canProducto.split(" , ");
+ const item = Producto.split(" , ");
+ const precio = precioProducto.split(" , ");
 
- const ventas = unirArray(cantidad, item, precio);
+ //CREAR NUEVOS ARRAY FORMATEADO A MONEDAS
+const precioN = []
+
+precio.forEach((pU) => {    
+    pU = new Intl.NumberFormat('es-BO',{ style: 'currency', currency: 'BOB' }).format(pU)
+    precioN.push(pU);
+});
+
+ const ventas = unirArray(cantidad, item, precioN);
 
 
  /* Mostrando mis parametros en mi HTML */
@@ -67,17 +83,15 @@
  const hnombreCliente = document.querySelector("#nombreCliente");
  hnombreCliente.innerHTML = (nombreCliente);
 
- const hsubTotal = document.querySelector("#subTotal");
- hsubTotal.innerHTML = (subTotal);
+ document.querySelector("#subTotal").innerHTML = (formatSubTotal);
 
- const himpuesto = document.querySelector("#impuesto");
- himpuesto.innerHTML = (impuesto);
+ document.querySelector("#otroDescuento").innerHTML = (formatOtroDescuento);
 
- const hdescuento = document.querySelector("#descuento");
- hdescuento.innerHTML = (descuento);
+ document.querySelector("#impuesto").innerHTML = (formatImpuesto);
 
- const htotalPrecio = document.querySelector("#totalPrecio");
- htotalPrecio.innerHTML = (totalPrecio);
+ document.querySelector("#descuento").innerHTML = (formatDescuento);
+
+ document.querySelector("#totalPrecio").innerHTML = (formatTotalPrecio);
 
  /*URL YOUTUBE https://www.youtube.com/watch?v=dDy2krKujCY
  https://www.youtube.com/watch?v=DMGiOhH8jcQ*/
@@ -93,7 +107,7 @@
 
      fila.innerHTML += `<td class="tdProducto">${p[1]}</td>`
 
-     fila.innerHTML += `<td>${p[2]}</td>`
+     fila.innerHTML += `<td class="tdPrecio">${p[2]}</td>`
 
      /*let td = document.createElement('td');
      td.innerText = p[0];
