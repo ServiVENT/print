@@ -163,29 +163,39 @@ table{
     
 }
 
-.total{
+.total {
     display: flex;
-    padding-right: 20px;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .total b{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 80%;
+    display: flex;    
+    align-items: center;   
 }
 
-.total label{
+#otroDescuento{
+    color: red;
+}
+
+#impuesto{
+    color: blue;
+}
+
+#descuento{
+    color: red;
+}
+
+.precio {
+    width: 100px;
     text-align: right;
-    width: 20%;
-}
-
-.precio{
     font-size: 15px;
     color: rgb(53, 53, 53);
     font-weight: bold;
-    background-color: white;
+}
 
+.tdPrecio{
+    text-align: right;
 }
 
 .btnImprimir{
